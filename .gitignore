@@ -1,0 +1,6 @@
+.python-version
+__pycache__/
+.vscode/
+SQL/
+config.json
+*~

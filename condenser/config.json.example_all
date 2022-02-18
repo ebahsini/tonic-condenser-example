@@ -1,0 +1,55 @@
+{
+    "initial_targets": [
+        {
+            "table": "public.target_table",
+            "percent": 10
+        },
+        {
+            "table": "public.users",
+            "where": "split_part(email, '@', 2) = 'hotmail.com'"
+        }
+    ],
+    "db_type": "postgres",
+    "source_db_connection_info": {
+        "user_name": "user",
+        "host": "host.host.com",
+        "db_name": "source_db",
+        "port": 5432
+    },
+    "destination_db_connection_info": {
+        "user_name": "user",
+        "host": "host.host.com",
+        "db_name": "destination_db",
+        "password": "if you don't include a password option, you will be prompted every time",
+        "port": 5432
+    },
+    "keep_disconnected_tables": false,
+    "upstream_filters": [
+        {
+            "table": "public.an_upstream_table",
+            "condition": "timestamp > '01-01-2001'"
+        },
+        {
+            "column": "condition_applied_to_any_table_with_this_column",
+            "condition": "condition_applied_to_any_table_with_this_column > 42"
+        }
+    ],
+    "excluded_tables": [
+        "public.table_to_ignore", "public.spatial_ref_sys"
+    ],
+    "passthrough_tables": [
+        "public.table_of_settings", "public.table_of_constants"
+    ],
+    "dependency_breaks": [
+        {"fk_table": "schema2.table2", "target_table": "schema3.table3"}
+    ],
+    "fk_augmentation": [
+        {
+            "fk_table": "public.fk_table",
+            "fk_columns": ["user_id"],
+            "target_table": "public.user",
+            "target_columns": ["id"]
+        }
+    ],
+    "post_subset_sql": ["UPDATE a_table SET a_column = 'value'"]
+ }
